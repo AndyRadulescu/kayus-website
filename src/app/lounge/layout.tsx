@@ -1,4 +1,5 @@
 import {getLoungeMenu} from '@/app/lib/lounge-menu';
+import Link from 'next/link';
 
 export default async function LoungeLayout({children}: {
     children: React.ReactNode;
@@ -9,8 +10,10 @@ export default async function LoungeLayout({children}: {
     return (
         <section>
             <nav>
-                {menu.map((item: any) => (
-                    <span key={item.sys.id}>{item.fields.title}</span>
+                {menu.map((item) => (
+                    <Link href={`/${item.fields.slug}`} key={item.sys.id}>
+                        <p>{item.fields.foodType}</p>
+                    </Link>
                 ))}
             </nav>
 
