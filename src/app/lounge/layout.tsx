@@ -19,14 +19,16 @@ export default async function LoungeLayout({children}: {
             </div>
             <nav>
                 <div className="flex justify-center my-2">
+                    <a className="w-[80%] no-underline text-inherit" href="tel:0774080300">
                     <button
-                        className="w-[80%] primary-gradient text-gray-800 py-2 rounded-full uppercase text-xl">{t('bookATable')}</button>
+                            className="w-full pointer primary-gradient text-gray-800 py-2 rounded-full uppercase text-xl">{t('bookATable')}</button>
+                    </a>
                 </div>
                 {sortedMenu.map((item) => (
                     <Link href={`/${item.fields.slug}`} key={item.sys.id}>
                         <div className="flex justify-center my-2">
                             <button
-                                className="min-w-[80%] border-1 py-2 border-solid border-primary rounded-xl uppercase px-1">{item.fields.foodType}</button>
+                                className="min-w-[80%] border-1 py-2 border-solid border-primary rounded-xl uppercase px-1 pointer">{item.fields.foodType}</button>
                         </div>
                     </Link>
                 ))}
