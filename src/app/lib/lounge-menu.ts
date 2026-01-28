@@ -1,9 +1,8 @@
 import { contentfulClientApi } from './contentful';
-import {FoodCategory, FoodItem} from '@/app/model/menu';
-import {EntrySkeletonType} from 'contentful';
+import { FoodCategorySkeleton, FoodItemSkeleton} from '@/app/model/menu';
 
 export async function getLoungeMenu() {
-    const res = await contentfulClientApi.getEntries<EntrySkeletonType<FoodCategory>>({
+    const res = await contentfulClientApi.getEntries<FoodCategorySkeleton>({
         content_type: 'foodCategory',
     });
 
@@ -11,7 +10,7 @@ export async function getLoungeMenu() {
 }
 
 export async function getFoodItemsByCategorySlug(slug: string) {
-    const categoryRes = await contentfulClientApi.getEntries<EntrySkeletonType<FoodCategory>>({
+    const categoryRes = await contentfulClientApi.getEntries<FoodCategorySkeleton>({
         content_type: 'foodCategory',
         'fields.slug': slug,
         limit: 1,
@@ -20,7 +19,7 @@ export async function getFoodItemsByCategorySlug(slug: string) {
     const category = categoryRes.items[0];
     if (!category) return [];
 
-    const itemsRes = await contentfulClientApi.getEntries<EntrySkeletonType<FoodItem>>({
+    const itemsRes = await contentfulClientApi.getEntries<FoodItemSkeleton>({
         content_type: 'foodItem',
         'fields.foodType.sys.id': category.sys.id,
     });
