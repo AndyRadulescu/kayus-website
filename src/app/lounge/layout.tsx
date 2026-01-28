@@ -24,7 +24,7 @@ export default async function LoungeLayout({children}: {
                     <Link href={`/${item.fields.slug}`} key={item.sys.id}>
                         <div className="flex justify-center my-2">
                             <button
-                                className="w-[80%] border-1 py-2 border-solid border-primary rounded-xl uppercase text-xl">{item.fields.foodType}</button>
+                                className="min-w-[80%] border-1 py-2 border-solid border-primary rounded-xl uppercase px-1">{item.fields.foodType}</button>
                         </div>
                     </Link>
                 ))}
