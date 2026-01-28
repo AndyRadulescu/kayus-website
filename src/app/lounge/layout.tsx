@@ -7,6 +7,7 @@ export default async function LoungeLayout({children}: {
     children: React.ReactNode;
 }) {
     const menu = await getLoungeMenu();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const {t} = await useTranslationServer();
 
     return (
@@ -28,7 +29,6 @@ export default async function LoungeLayout({children}: {
                     </Link>
                 ))}
             </nav>
-
             {children}
         </section>
     );

@@ -1,0 +1,31 @@
+'use client';
+
+import i18next from 'i18next';
+import {initReactI18next, useTranslation} from 'react-i18next';
+import resourcesToBackend from 'i18next-resources-to-backend';
+import Cookies from 'js-cookie';
+import {getOptions} from '@/app/lib/18n-config';
+import {useEffect} from 'react';
+
+const lng = Cookies.get('NEXT_LOCALE') || 'ro';
+
+i18next
+    .use(initReactI18next)
+    .use(resourcesToBackend((language: string) =>
+        import(`@/locales/${language}.json`)))
+    .init(getOptions(lng));
+
+export default i18next;
+
+export function ClientTranslationProvider({children}: { children: React.ReactNode }) {
+    const {i18n: i18nInstance} = useTranslation();
+
+    useEffect(() => {
+        const currentCookieLocale = Cookies.get('NEXT_LOCALE') || 'en-US';
+        if (i18nInstance.language !== currentCookieLocale) {
+            i18nInstance.changeLanguage(currentCookieLocale);
+        }
+    }, [i18nInstance]);
+
+    return <>{children}</>;
+}
