@@ -7,6 +7,8 @@ export default async function LoungeLayout({children}: {
     children: React.ReactNode;
 }) {
     const menu = await getLoungeMenu();
+    const sortedMenu = [...menu].sort((a, b) => a.fields.priority - b.fields.priority);
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {t} = await useTranslationServer();
 
@@ -20,7 +22,7 @@ export default async function LoungeLayout({children}: {
                     <button
                         className="w-[80%] primary-gradient text-gray-800 py-2 rounded-full uppercase text-xl">{t('bookATable')}</button>
                 </div>
-                {menu.map((item) => (
+                {sortedMenu.map((item) => (
                     <Link href={`/${item.fields.slug}`} key={item.sys.id}>
                         <div className="flex justify-center my-2">
                             <button

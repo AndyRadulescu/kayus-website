@@ -1,6 +1,7 @@
 import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
 import {Macros} from '@/app/components/macros';
 import {Asset, UnresolvedLink} from 'contentful';
+import AssetWrapper from '@/app/[slug]/asset-wrapper';
 
 interface Props {
     params: { slug: string };
@@ -11,10 +12,6 @@ function isResolved<T>(entry: T | UnresolvedLink<'Entry'>): entry is T {
         return entry.fields !== undefined;
     }
     return false;
-}
-
-export function isResolvedAsset(asset: Asset | UnresolvedLink<'Asset'>): asset is Asset {
-    return asset && 'fields' in asset;
 }
 
 export default async function CategoryPage({params}: Props) {
@@ -29,13 +26,7 @@ export default async function CategoryPage({params}: Props) {
                 {items.map((item) => (
                     <li key={item.sys.id}>
                         <div className="bg-neutral-900 mb-4 rounded-2xl">
-                            <video autoPlay loop muted playsInline preload="metadata" className="rounded-xl">
-                                {isResolvedAsset(item?.fields?.foodImg) ? (
-                                    <source src={item?.fields?.foodImg?.fields?.file?.url} type="video/webm"/>
-                                ) : (
-                                    <p>Image not loaded</p>
-                                )}
-                            </video>
+                            <AssetWrapper foodImg={item.fields.foodImg}/>
                             <p className="text-center text-xl font-bold my-2 text-primary">{item.fields.foodTitle}</p>
                             <p className="text-center">{item.fields.ingredients}</p>
                             <div className="flex justify-center text-center">

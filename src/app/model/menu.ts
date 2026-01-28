@@ -3,6 +3,7 @@ import { EntryFieldTypes, EntrySkeletonType } from 'contentful';
 export interface FoodCategoryFields {
     foodType: EntryFieldTypes.Symbol;
     slug: EntryFieldTypes.Symbol;
+    priority: EntryFieldTypes.Integer;
 }
 
 export interface FoodItemFields {
