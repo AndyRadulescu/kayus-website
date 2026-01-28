@@ -21,7 +21,7 @@ export default async function CategoryPage({params}: Props) {
     const {slug} = await params;
 
     const items = await getFoodItemsByCategorySlug(slug);
-    const foodTypeField = items[0].fields.foodType;
+    const foodTypeField = items[0]?.fields?.foodType;
     return (
         <div className="p-4">
             <h1 className="text-center text-2xl mb-2">{isResolved(foodTypeField) ? foodTypeField.fields.foodType : 'Loading...'}</h1>
@@ -30,8 +30,8 @@ export default async function CategoryPage({params}: Props) {
                     <li key={item.sys.id}>
                         <div className="bg-neutral-900 mb-4 rounded-2xl">
                             <video autoPlay loop muted playsInline preload="metadata" className="rounded-xl">
-                                {isResolvedAsset(item.fields.foodImg) ? (
-                                    <source src={item.fields.foodImg.fields.file?.url} type="video/webm"/>
+                                {isResolvedAsset(item?.fields?.foodImg) ? (
+                                    <source src={item?.fields?.foodImg?.fields?.file?.url} type="video/webm"/>
                                 ) : (
                                     <p>Image not loaded</p>
                                 )}

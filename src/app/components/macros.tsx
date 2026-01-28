@@ -1,15 +1,15 @@
 'use client';
-
+import {useTranslation} from 'react-i18next';
 import {useState} from 'react';
 
 export function Macros({macros}: { macros: string }) {
     const [open, setOpen] = useState(false);
-
+    const {t} = useTranslation();
 
     return (
         <div>
             <button onClick={() => setOpen(o => !o)} className="text-xs text-gray-500 underline">
-                {open ? 'Hide macros' : 'Show macros'}
+                {open ? t('hideMacros') : t('showMacros')}
             </button>
             <div className={`
                 overflow-hidden transition-all duration-300 ease-out
