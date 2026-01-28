@@ -22,7 +22,9 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
     return (
         <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ClientTranslationProvider>{children}</ClientTranslationProvider>
+        <ClientTranslationProvider>
+            <div className="w-full sm:w-2/3 lg:w-1/2 mx-auto">{children}</div>
+        </ClientTranslationProvider>
         </body>
         </html>
     );

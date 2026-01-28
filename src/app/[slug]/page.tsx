@@ -1,6 +1,6 @@
 import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
 import {Macros} from '@/app/components/macros';
-import {Asset, UnresolvedLink} from 'contentful';
+import {UnresolvedLink} from 'contentful';
 import AssetWrapper from '@/app/[slug]/asset-wrapper';
 
 interface Props {

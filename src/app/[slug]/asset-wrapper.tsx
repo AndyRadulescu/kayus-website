@@ -14,11 +14,25 @@ export default function AssetWrapper({foodImg}: { foodImg: UnresolvedLink<'Asset
 
     const url = foodImg.fields.file.url as string;
     if (foodImg.fields.file.contentType === 'video/webm') return (
-        <video autoPlay loop muted playsInline preload="metadata" className="rounded-xl">
-            <source src={url} type="video/webm"/>
-        </video>
+        <div className="rounded-xl overflow-hidden w-full">
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+            >
+                <source src={url} type="video/webm"/>
+            </video>
+        </div>
     );
     return (
-        <Image src={url} alt="Image"/>
+        <div className="image-container rounded-2xl" style={{position: 'relative', width: '100%', height: '300px'}}>
+            <Image
+                className="rounded-2xl" src={'https:' + url} alt={foodImg.fields.file.fileName} loading="lazy" fill
+                objectFit="cover"
+            />
+        </div>
     );
 }
