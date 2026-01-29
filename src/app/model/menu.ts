@@ -1,5 +1,12 @@
 import { EntryFieldTypes, EntrySkeletonType } from 'contentful';
 
+
+export interface PromotionFields {
+    promotionTitle: EntryFieldTypes.Symbol;
+    isVisible: EntryFieldTypes.Boolean;
+    promotionMedia: EntryFieldTypes.AssetLink;
+}
+
 export interface FoodCategoryFields {
     foodType: EntryFieldTypes.Symbol;
     slug: EntryFieldTypes.Symbol;
@@ -15,5 +22,6 @@ export interface FoodItemFields {
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
 }
 
+export type PromotionSkeleton = EntrySkeletonType<PromotionFields, 'promotion'>;
 export type FoodCategorySkeleton = EntrySkeletonType<FoodCategoryFields, 'foodCategory'>;
 export type FoodItemSkeleton = EntrySkeletonType<FoodItemFields, 'foodItem'>;

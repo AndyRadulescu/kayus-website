@@ -2,6 +2,7 @@ import {getLoungeMenu} from '@/app/lib/lounge-menu';
 import Link from 'next/link';
 import Image from 'next/image';
 import {useTranslationServer} from '../lib/i18n-server';
+import Promotion from '@/app/components/promotion';
 
 export default async function LoungeLayout({children}: {
     children: React.ReactNode;
@@ -18,6 +19,7 @@ export default async function LoungeLayout({children}: {
                 <Image src="/logo.svg" alt="Logo" width={100} height={100}/>
             </div>
             <nav>
+                <Promotion/>
                 <div className="flex justify-center my-2">
                     <a className="w-[80%] no-underline text-inherit" href="tel:0774080300">
                     <button

@@ -1,6 +1,17 @@
 import { contentfulClientApi } from './contentful';
-import { FoodCategorySkeleton, FoodItemSkeleton} from '@/app/model/menu';
+import {FoodCategorySkeleton, FoodItemSkeleton, PromotionSkeleton} from '@/app/model/menu';
 import {cookies} from 'next/headers';
+
+export async function getPromotion() {
+    const cookieStore = await cookies();
+    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const res = await contentfulClientApi.getEntries<PromotionSkeleton>({
+        content_type: 'promotion',
+        locale: locale,
+    });
+
+    return res.items;
+}
 
 export async function getLoungeMenu() {
     const cookieStore = await cookies();
