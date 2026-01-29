@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.scss';
 import {ClientTranslationProvider} from '@/app/lib/i18n-client';
+import {cookies} from 'next/headers';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -18,10 +19,12 @@ export const metadata: Metadata = {
     description: 'The comprehensive menu of Kayus restaurant.',
 };
 
-export default function RootLayout({children,}: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({children,}: Readonly<{ children: React.ReactNode }>) {
+    const cookieStore = await cookies();
+    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
     return (
-        <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <html lang={locale}>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} key={locale}>
         <ClientTranslationProvider>
             <div className="w-full sm:w-2/3 lg:w-1/2 mx-auto">{children}</div>
         </ClientTranslationProvider>
