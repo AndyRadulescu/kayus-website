@@ -1,5 +1,9 @@
 {
   "bookATable": "Book a table",
   "showMacros": "Show macros",
-  "hideMacros": "Hide macros"
+  "hideMacros": "Hide macros",
+  "cookie.title": "We care about your experience",
+  "cookie.description": "We use cookies to optimize the site and to offer you the best Mexican brunch online.",
+  "cookie.accept": "Accept",
+  "cookie.reject": "Decline"
 }

@@ -19,7 +19,7 @@ export default function LanguageToggle({ initialLocale }: { initialLocale: strin
     return (
         <button
             onClick={toggleLanguage}
-            className="flex items-center gap-2 px-4 py-2 bg-black-900 border-solid border-1 border-primary rounded-full shadow-sm transition-colors text-sm font-medium text-gray-100"
+            className="flex items-center gap-2 px-4 py-2 bg-black border-solid border-1 rounded-full shadow-sm transition-colors text-sm font-medium"
         >
             <Languages
                 size={16}

@@ -23,7 +23,7 @@ export default async function LoungeLayout({children}: {
                 <div className="flex justify-center my-2">
                     <a className="w-[80%] no-underline text-inherit" href="tel:0774080300">
                     <button
-                            className="w-full pointer primary-gradient text-gray-800 py-2 rounded-full uppercase text-xl">{t('bookATable')}</button>
+                            className="w-full pointer primary-gradient text-black py-2 rounded-full uppercase text-xl">{t('bookATable')}</button>
                     </a>
                 </div>
                 {sortedMenu.map((item) => (

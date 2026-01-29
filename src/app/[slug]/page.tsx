@@ -32,7 +32,7 @@ export default async function CategoryPage({params}: Props) {
                             <div className="flex justify-center text-center">
                                 <Macros macros={item.fields.macros}/>
                             </div>
-                            <p className="text-center primary-gradient text-gray-700 mt-2 rounded-b-2xl py-1">{item.fields.priceAndInfo}</p>
+                            <p className="text-center primary-gradient text-black mt-2 rounded-b-2xl py-1">{item.fields.priceAndInfo}</p>
                         </div>
                     </li>
                 ))}

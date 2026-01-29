@@ -1,5 +1,9 @@
 {
   "bookATable": "Rezervă o masă",
   "showMacros": "Macronutrienți",
-  "hideMacros": "Ascunde"
+  "hideMacros": "Ascunde",
+  "cookie.title": "Avem grijă de experiența ta",
+  "cookie.description": "Utilizăm cookie-uri pentru a optimiza site-ul și pentru a-ți oferi cel mai bun brunch mexican online.",
+  "cookie.accept": "Acceptă",
+  "cookie.reject": "Refuză"
 }
