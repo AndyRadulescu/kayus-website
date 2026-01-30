@@ -1,5 +1,5 @@
 import {getPromotion} from '@/app/lib/lounge-menu';
-import AssetWrapper from '@/app/[slug]/asset-wrapper';
+import AssetWrapper from '@/app/lounge/[slug]/asset-wrapper';
 
 export default async function Promotion() {
     const promotion = await getPromotion();

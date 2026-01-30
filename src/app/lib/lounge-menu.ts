@@ -1,5 +1,5 @@
 import { contentfulClientApi } from './contentful';
-import {FoodCategorySkeleton, FoodItemSkeleton, PromotionSkeleton} from '@/app/model/menu';
+import {DrinkItemSkeleton, FoodCategorySkeleton, FoodItemSkeleton, PromotionSkeleton} from '@/app/model/menu';
 import {cookies} from 'next/headers';
 
 export async function getPromotion() {
@@ -40,6 +40,28 @@ export async function getFoodItemsByCategorySlug(slug: string) {
     const itemsRes = await contentfulClientApi.getEntries<FoodItemSkeleton>({
         content_type: 'foodItem',
         'fields.foodType.sys.id': category.sys.id,
+        locale: locale,
+    });
+
+    return itemsRes.items;
+}
+
+export async function getDrinksItemsByCategorySlug(slug: string) {
+    const cookieStore = await cookies();
+    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const categoryRes = await contentfulClientApi.getEntries<FoodCategorySkeleton>({
+        content_type: 'foodCategory',
+        'fields.slug': slug,
+        limit: 1,
+        locale: locale,
+    });
+
+    const category = categoryRes.items[0];
+    if (!category) return [];
+
+    const itemsRes = await contentfulClientApi.getEntries<DrinkItemSkeleton>({
+        content_type: 'drinkItem',
+        'fields.drinkType.sys.id': category.sys.id,
         locale: locale,
     });
 

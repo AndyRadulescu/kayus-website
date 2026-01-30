@@ -22,6 +22,15 @@ export interface FoodItemFields {
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
 }
 
+export interface DrinkItemFields {
+    drinkTitle: EntryFieldTypes.Symbol;
+    price: EntryFieldTypes.Symbol;
+    drinkCategory: EntryFieldTypes.Symbol;
+    drinkCategoryId: EntryFieldTypes.Symbol;
+    drinkType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
+}
+
 export type PromotionSkeleton = EntrySkeletonType<PromotionFields, 'promotion'>;
 export type FoodCategorySkeleton = EntrySkeletonType<FoodCategoryFields, 'foodCategory'>;
 export type FoodItemSkeleton = EntrySkeletonType<FoodItemFields, 'foodItem'>;
+export type DrinkItemSkeleton = EntrySkeletonType<DrinkItemFields, 'drinkItem'>;

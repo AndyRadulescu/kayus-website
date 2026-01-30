@@ -1,26 +1,14 @@
-import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
+import AssetWrapper from '@/app/lounge/[slug]/asset-wrapper';
 import {Macros} from '@/app/components/macros';
-import {UnresolvedLink} from 'contentful';
-import AssetWrapper from '@/app/[slug]/asset-wrapper';
+import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
+import {isResolved} from '@/app/lounge/[slug]/utils';
 
-interface Props {
-    params: { slug: string };
-}
-
-function isResolved<T>(entry: T | UnresolvedLink<'Entry'>): entry is T {
-    if (entry != null && typeof entry === 'object' && 'fields' in entry) {
-        return entry.fields !== undefined;
-    }
-    return false;
-}
-
-export default async function CategoryPage({params}: Props) {
-    const {slug} = await params;
-
+export default async function FoodContainer({slug}: { slug: string  }) {
     const items = await getFoodItemsByCategorySlug(slug);
     const foodTypeField = items[0]?.fields?.foodType;
+
     return (
-        <div className="p-4">
+        <>
             <h1 className="text-center text-2xl mb-2">{isResolved(foodTypeField) ? foodTypeField.fields.foodType : 'Loading...'}</h1>
             <ul>
                 {items.map((item) => (
@@ -37,6 +25,6 @@ export default async function CategoryPage({params}: Props) {
                     </li>
                 ))}
             </ul>
-        </div>
+        </>
     );
 }
