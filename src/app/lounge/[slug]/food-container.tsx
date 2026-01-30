@@ -1,14 +1,7 @@
 import AssetWrapper from '@/app/lounge/[slug]/asset-wrapper';
 import {Macros} from '@/app/components/macros';
 import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
-import {UnresolvedLink} from 'contentful';
-
-function isResolved<T>(entry: T | UnresolvedLink<'Entry'>): entry is T {
-    if (entry != null && typeof entry === 'object' && 'fields' in entry) {
-        return entry.fields !== undefined;
-    }
-    return false;
-}
+import {isResolved} from '@/app/lounge/[slug]/utils';
 
 export default async function FoodContainer({slug}: { slug: string  }) {
     const items = await getFoodItemsByCategorySlug(slug);
