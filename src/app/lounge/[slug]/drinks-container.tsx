@@ -51,7 +51,7 @@ export default async function DrinksContainer({slug}: { slug: string }) {
                                     <span className="font-medium text-sm group-hover:text-primary transition-colors">
                                         {item.fields.drinkTitle}
                                     </span>
-                                    <div className="flex-1 border-b border-dotted border-gray-300 mx-2 mb-1"/>
+                                    <div className="hidden md:flex md:flex-1 border-b border-dotted border-gray-300 mx-2 mb-1"/>
                                     <span className="text-gray-600 text-sm font-semibold whitespace-nowrap">
                                         {item.fields.price}
                                     </span>
