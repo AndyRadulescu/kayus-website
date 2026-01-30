@@ -61,7 +61,7 @@ export async function getDrinksItemsByCategorySlug(slug: string) {
 
     const itemsRes = await contentfulClientApi.getEntries<DrinkItemSkeleton>({
         content_type: 'drinkItem',
-        'fields.drinkItem.sys.id': category.sys.id,
+        'fields.drinkType.sys.id': category.sys.id,
         locale: locale,
     });
 
