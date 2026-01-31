@@ -3,6 +3,7 @@ import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.scss';
 import {ClientTranslationProvider} from '@/app/lib/i18n-client';
 import {cookies} from 'next/headers';
+import {Analytics} from '@vercel/analytics/next';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -28,6 +29,7 @@ export default async function RootLayout({children,}: Readonly<{ children: React
         <ClientTranslationProvider>
             <div className="w-full sm:w-2/3 lg:w-1/2 mx-auto">{children}</div>
         </ClientTranslationProvider>
+        <Analytics />;
         </body>
         </html>
     );
