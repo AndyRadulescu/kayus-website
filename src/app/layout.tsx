@@ -29,7 +29,7 @@ export default async function RootLayout({children,}: Readonly<{ children: React
         <ClientTranslationProvider>
             <div className="w-full sm:w-2/3 lg:w-1/2 mx-auto">{children}</div>
         </ClientTranslationProvider>
-        <Analytics />;
+        <Analytics />
         </body>
         </html>
     );
