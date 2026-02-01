@@ -19,7 +19,7 @@ export default function LanguageToggle({ initialLocale }: { initialLocale: strin
     return (
         <button
             onClick={toggleLanguage}
-            className="flex items-center gap-2 px-4 py-2 bg-black border-solid border-1 rounded-full shadow-sm transition-colors text-sm font-medium"
+            className="flex items-center gap-2 px-4 py-2 bg-black border-primary border-solid border-1 rounded-full shadow-sm transition-colors text-sm font-medium"
         >
             <Languages
                 size={16}
@@ -28,7 +28,7 @@ export default function LanguageToggle({ initialLocale }: { initialLocale: strin
             <span>
                 {locale === 'en-US' ? 'English' : 'Română'}
             </span>
-            <span className="text-xs text-gray-100 border-l pl-2 ml-1">
+            <span className="text-xs text-gray-100 border-l border-primary pl-2 ml-1">
                 {locale === 'en-US' ? 'RO' : 'EN'}
             </span>
         </button>
