@@ -15,7 +15,7 @@ export default async function FoodContainer({slug}: { slug: string  }) {
                     <li key={item.sys.id}>
                         <div className="bg-neutral-900 mb-4 rounded-2xl">
                             <AssetWrapper foodImg={item.fields.foodImg}/>
-                            <p className="text-center text-xl font-bold my-2 text-primary">{item.fields.foodTitle}</p>
+                            <p className="text-center text-xl font-bold p-2 text-primary">{item.fields.foodTitle}</p>
                             <p className="text-center">{item.fields.ingredients}</p>
                             <div className="flex justify-center text-center">
                                 <Macros macros={item.fields.macros}/>

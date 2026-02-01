@@ -15,10 +15,10 @@ export interface FoodCategoryFields {
 
 export interface FoodItemFields {
     foodTitle: EntryFieldTypes.Symbol;
-    ingredients: EntryFieldTypes.Symbol;
+    ingredients?: EntryFieldTypes.Symbol;
     macros: EntryFieldTypes.Symbol;
     priceAndInfo: EntryFieldTypes.Symbol;
-    foodImg: EntryFieldTypes.AssetLink;
+    foodImg?: EntryFieldTypes.AssetLink;
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
 }
 
