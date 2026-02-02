@@ -1,9 +1,10 @@
-import AssetWrapper from '@/app/lounge/[slug]/asset-wrapper';
+import AssetWrapper from '@/app/[type]/[slug]/asset-wrapper';
 import {Macros} from '@/app/components/macros';
 import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
-import {isResolved} from '@/app/lounge/[slug]/utils';
+import {isResolved} from '@/app/[type]/[slug]/utils';
+import {RestaurantType} from '@/app/model/restaurant-type';
 
-export default async function FoodContainer({slug}: { slug: string  }) {
+export default async function FoodContainer({slug, type}: { slug: string, type: RestaurantType  }) {
     const items = await getFoodItemsByCategorySlug(slug);
     const foodTypeField = items[0]?.fields?.foodType;
 
