@@ -19,6 +19,7 @@ export interface FoodItemFields {
     macros: EntryFieldTypes.Symbol;
     priceAndInfo: EntryFieldTypes.Symbol;
     foodImg?: EntryFieldTypes.AssetLink;
+    availability: EntryFieldTypes.Symbol;
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
 }
 
@@ -27,6 +28,7 @@ export interface DrinkItemFields {
     price: EntryFieldTypes.Symbol;
     drinkCategory: EntryFieldTypes.Symbol;
     drinkCategoryId: EntryFieldTypes.Symbol;
+    availability: EntryFieldTypes.Symbol;
     drinkType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
 }
 

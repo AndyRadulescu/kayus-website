@@ -6,8 +6,16 @@ import {getLoungeMenu} from '@/app/lib/lounge-menu';
 import Link from 'next/link';
 import {useTranslationServer} from '../lib/i18n-server';
 import Promotion from '@/app/components/promotion';
+import {notFound} from 'next/navigation';
+import {PropsType, validRestaurantTypes} from '@/app/model/restaurant-type';
 
-export default async function Lounge() {
+export default async function Lounge({params}: PropsType) {
+    const {type} = await params;
+
+    console.log(type);
+    if (!validRestaurantTypes.includes(type)) {
+        notFound();
+    }
     const cookieStore = await cookies();
     const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
 
@@ -20,7 +28,7 @@ export default async function Lounge() {
     return (
         <main className="p-4">
             <div className="flex justify-center mt-4 mb-8">
-                <Image src="/logo.svg" alt="Logo" width={100} height={100}/>
+                <Image src={`/logo-${type}.svg`} alt="Logo" width={100} height={100}/>
             </div>
             <nav>
                 <Promotion/>
@@ -31,7 +39,7 @@ export default async function Lounge() {
                     </a>
                 </div>
                 {sortedMenu.map((item) => (
-                    <Link href={`/lounge/${item.fields.slug}`} key={item.sys.id}>
+                    <Link href={`/${type}/${item.fields.slug}`} key={item.sys.id}>
                         <div className="flex justify-center my-2">
                             <button
                                 className="min-w-[80%] border-1 py-2 border-solid border-primary rounded-xl uppercase px-1 pointer">{item.fields.foodType}</button>

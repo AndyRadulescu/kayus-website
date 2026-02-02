@@ -1,5 +1,6 @@
 import {getDrinksItemsByCategorySlug} from '@/app/lib/lounge-menu';
-import {isResolved} from '@/app/lounge/[slug]/utils';
+import {filterAvailabilityDrinks, isResolved} from '@/app/[type]/[slug]/utils';
+import {RestaurantType} from '@/app/model/restaurant-type';
 
 export const DRINKS_ORDER = [
     'soft-drinks',
@@ -16,18 +17,18 @@ export const DRINKS_ORDER = [
     'beer',
 ] as const;
 
-export default async function DrinksContainer({slug}: { slug: string }) {
+export default async function DrinksContainer({slug, type}: { slug: string, type: RestaurantType }) {
     const items = await getDrinksItemsByCategorySlug(slug);
     const drinksTypeField = items[0]?.fields?.drinkType;
-
-    const groupedItems = items.reduce((acc, item) => {
+    const filteredItems = filterAvailabilityDrinks(type, items);
+    const groupedItems = filteredItems.reduce((acc, item) => {
         const categoryId = item.fields.drinkCategoryId || 'Other';
         if (!acc[categoryId]) {
             acc[categoryId] = [];
         }
         acc[categoryId].push(item);
         return acc;
-    }, {} as Record<string, typeof items>);
+    }, {} as Record<string, typeof filteredItems>);
 
     return (
         <>
