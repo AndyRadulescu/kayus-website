@@ -13,6 +13,7 @@ import {PropsType, validRestaurantTypes} from '@/app/model/restaurant-type';
 export default async function Lounge({params}: PropsType) {
     const {type} = await params;
 
+    console.log(type);
     if (!validRestaurantTypes.includes(type)) {
         notFound();
     }
@@ -28,7 +29,7 @@ export default async function Lounge({params}: PropsType) {
     return (
         <main className="p-4">
             <div className="flex justify-center mt-4 mb-8">
-                <Image src="/logo.svg" alt="Logo" width={100} height={100}/>
+                <Image src={`/logo-${type}.svg`} alt="Logo" width={100} height={100}/>
             </div>
             <nav>
                 <Promotion/>
