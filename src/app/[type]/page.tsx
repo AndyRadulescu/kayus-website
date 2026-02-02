@@ -9,7 +9,6 @@ import Promotion from '@/app/components/promotion';
 import {notFound} from 'next/navigation';
 import {PropsType, validRestaurantTypes} from '@/app/model/restaurant-type';
 
-
 export default async function Lounge({params}: PropsType) {
     const {type} = await params;
 
