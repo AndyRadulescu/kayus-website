@@ -1,31 +1,33 @@
 'use client';
 
-import i18next from 'i18next';
-import {initReactI18next, useTranslation} from 'react-i18next';
+import { useState, useEffect, ReactNode } from 'react';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { createInstance } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
-import Cookies from 'js-cookie';
-import {getOptions} from '@/app/lib/18n-config';
-import {useEffect} from 'react';
+import { getOptions } from '@/app/lib/18n-config';
 
-const lng = Cookies.get('NEXT_LOCALE') || 'ro';
+const backend = resourcesToBackend((language: string) =>
+    import(`@/locales/${language}.json`)
+);
 
-i18next
-    .use(initReactI18next)
-    .use(resourcesToBackend((language: string) =>
-        import(`@/locales/${language}.json`)))
-    .init(getOptions(lng));
-
-export default i18next;
-
-export function ClientTranslationProvider({children}: { children: React.ReactNode }) {
-    const {i18n: i18nInstance} = useTranslation();
+export function ClientTranslationProvider({children, locale}: { children: ReactNode, locale: string }) {
+    const [i18n] = useState(() => {
+        const instance = createInstance();
+        instance
+            .use(initReactI18next)
+            .use(backend)
+            .init({
+                ...getOptions(locale),
+                lng: locale,
+            });
+        return instance;
+    });
 
     useEffect(() => {
-        const currentCookieLocale = Cookies.get('NEXT_LOCALE') || 'en-US';
-        if (i18nInstance.language !== currentCookieLocale) {
-            i18nInstance.changeLanguage(currentCookieLocale);
+        if (i18n.language !== locale) {
+            i18n.changeLanguage(locale);
         }
-    }, [i18nInstance]);
+    }, [locale, i18n]);
 
-    return <>{children}</>;
+    return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }

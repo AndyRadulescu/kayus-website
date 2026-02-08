@@ -1,4 +1,3 @@
-import {cookies} from 'next/headers';
 import LanguageToggle from '@/app/components/language-togler';
 import CookieBanner from '@/app/components/cookie-banner';
 import Image from 'next/image';
@@ -8,23 +7,22 @@ import {useTranslationServer} from '../lib/i18n-server';
 import Promotion from '@/app/components/promotion';
 import {notFound} from 'next/navigation';
 import {PropsType, validRestaurantTypes} from '@/app/model/restaurant-type';
+import {getServerLocaleFromCookies} from '@/app/utils';
+import {ClientTranslationProvider} from '@/app/lib/i18n-client';
 
 export default async function Lounge({params}: PropsType) {
     const {type} = await params;
 
-    console.log(type);
     if (!validRestaurantTypes.includes(type)) {
         notFound();
     }
-    const cookieStore = await cookies();
-    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const locale = await getServerLocaleFromCookies();
 
     const menu = await getLoungeMenu();
     const sortedMenu = [...menu].sort((a, b) => a.fields.priority - b.fields.priority);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const {t} = await useTranslationServer();
-
+    const {i18n, t} = await useTranslationServer();
     return (
         <main className="p-4">
             <div className="flex justify-center mt-4 mb-8">
@@ -49,7 +47,9 @@ export default async function Lounge({params}: PropsType) {
             </nav>
             <section className="flex justify-center p-8">
                 <LanguageToggle initialLocale={locale}/>
-                <CookieBanner/>
+                <ClientTranslationProvider locale={i18n.language}>
+                    <CookieBanner/>
+                </ClientTranslationProvider>
             </section>
         </main>
     );

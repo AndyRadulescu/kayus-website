@@ -6,12 +6,11 @@ import {
     FoodItemSkeleton,
     PromotionSkeleton
 } from '@/app/model/menu';
-import {cookies} from 'next/headers';
 import {Entry} from 'contentful';
+import {getServerLocaleFromCookies} from '@/app/utils';
 
 export async function getPromotion() {
-    const cookieStore = await cookies();
-    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const locale = await getServerLocaleFromCookies();
     const res = await contentfulClientApi.getEntries<PromotionSkeleton>({
         content_type: 'promotion',
         locale: locale,
@@ -21,8 +20,7 @@ export async function getPromotion() {
 }
 
 export async function getLoungeMenu() {
-    const cookieStore = await cookies();
-    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const locale = await getServerLocaleFromCookies();
     const res = await contentfulClientApi.getEntries<FoodCategorySkeleton>({
         content_type: 'foodCategory',
         locale: locale,
@@ -32,8 +30,7 @@ export async function getLoungeMenu() {
 }
 
 export async function getFoodItemsByCategorySlug(slug: string) {
-    const cookieStore = await cookies();
-    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const locale = await getServerLocaleFromCookies();
     const categoryRes = await contentfulClientApi.getEntries<FoodCategorySkeleton>({
         content_type: 'foodCategory',
         'fields.slug': slug,
@@ -54,8 +51,7 @@ export async function getFoodItemsByCategorySlug(slug: string) {
 }
 
 export async function getDrinksSectionsByCategorySlug(slug: string) {
-    const cookieStore = await cookies();
-    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const locale = await getServerLocaleFromCookies();
 
     const categoryRes = await contentfulClientApi.getEntries<FoodCategorySkeleton>({
         content_type: 'foodCategory',
@@ -77,8 +73,7 @@ export async function getDrinksSectionsByCategorySlug(slug: string) {
 }
 
 export async function getDrinkItemsBySectionId(sectionId: Entry<DrinkSectionSkeleton, undefined, string>) {
-    const cookieStore = await cookies();
-    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+    const locale = await getServerLocaleFromCookies();
 
     const drinkSection = sectionId;
     if (!drinkSection) return [];

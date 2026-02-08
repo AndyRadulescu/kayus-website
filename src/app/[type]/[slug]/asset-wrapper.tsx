@@ -11,7 +11,6 @@ export default function AssetWrapper({foodImg}: { foodImg: AssetType }) {
     if (!foodImg) return;
     if (!isResolvedAsset(foodImg)) return <p>Loading...</p>;
     if (!foodImg?.fields?.file) return <p>Image not loaded</p>;
-
     const url = foodImg.fields.file.url as string;
     const containerClasses = 'relative w-full overflow-hidden rounded-2xl shadow-md max-h-[250px] lg:max-h-[333px] xl:max-h-[450px] mx-auto';
 
