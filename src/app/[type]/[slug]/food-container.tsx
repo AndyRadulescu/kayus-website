@@ -10,7 +10,7 @@ export default async function FoodContainer({slug, type}: { slug: string, type: 
     const filteredItems = filterAvailabilityFood(type, items);
     return (
         <>
-            <h1 className="text-center text-2xl mb-2">{isResolved(foodTypeField) ? foodTypeField.fields.foodType : 'Loading...'}</h1>
+            <h1 className="text-center text-2xl mb-6 uppercase">{isResolved(foodTypeField) ? `- ${foodTypeField.fields.foodType} -` : 'Loading...'}</h1>
             <ul>
                 {filteredItems.map((item) => (
                     <li key={item.sys.id}>

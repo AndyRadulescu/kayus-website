@@ -1,4 +1,4 @@
-import { EntryFieldTypes, EntrySkeletonType } from 'contentful';
+import {EntryFieldTypes, EntrySkeletonType} from 'contentful';
 
 
 export interface PromotionFields {
@@ -19,20 +19,28 @@ export interface FoodItemFields {
     macros: EntryFieldTypes.Symbol;
     priceAndInfo: EntryFieldTypes.Symbol;
     foodImg?: EntryFieldTypes.AssetLink;
+    thumbnail?: EntryFieldTypes.AssetLink;
     availability: EntryFieldTypes.Symbol;
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
+}
+
+export interface DrinkSectionFields {
+    drinkTitle: EntryFieldTypes.Symbol;
+    priority: EntryFieldTypes.Integer;
+    slug: EntryFieldTypes.Symbol;
+    drinkType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
 }
 
 export interface DrinkItemFields {
     drinkTitle: EntryFieldTypes.Symbol;
     price: EntryFieldTypes.Symbol;
-    drinkCategory: EntryFieldTypes.Symbol;
-    drinkCategoryId: EntryFieldTypes.Symbol;
     availability: EntryFieldTypes.Symbol;
-    drinkType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
+    drinkSection: EntryFieldTypes.EntryLink<DrinkSectionSkeleton>;
+
 }
 
 export type PromotionSkeleton = EntrySkeletonType<PromotionFields, 'promotion'>;
 export type FoodCategorySkeleton = EntrySkeletonType<FoodCategoryFields, 'foodCategory'>;
 export type FoodItemSkeleton = EntrySkeletonType<FoodItemFields, 'foodItem'>;
+export type DrinkSectionSkeleton = EntrySkeletonType<DrinkSectionFields, 'drinkSection'>;
 export type DrinkItemSkeleton = EntrySkeletonType<DrinkItemFields, 'drinkItem'>;
