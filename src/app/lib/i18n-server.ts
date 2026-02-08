@@ -1,8 +1,8 @@
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
-import { cookies } from 'next/headers';
 import {createInstance} from 'i18next';
 import {getOptions} from '@/app/lib/18n-config';
+import {getServerLocaleFromCookies} from '@/app/utils';
 
 const initI18next = async (lng: string) => {
     const i18nInstance = createInstance();
@@ -15,8 +15,7 @@ const initI18next = async (lng: string) => {
 };
 
 export async function useTranslationServer() {
-    const cookieStore = await cookies();
-    const lng = cookieStore.get('NEXT_LOCALE')?.value || 'en-US';
+    const lng = await getServerLocaleFromCookies();
     const i18nextInstance = await initI18next(lng);
     return {
         t: i18nextInstance.getFixedT(lng),

@@ -2,13 +2,13 @@
 import {useTranslation} from 'react-i18next';
 import {useState} from 'react';
 
-export function Macros({macros}: { macros: string }) {
+export function Macros({macros, hideLabel, showLabel}: { macros: string, hideLabel: string, showLabel: string }) {
     const [open, setOpen] = useState(false);
-    const {t} = useTranslation();
+    useTranslation();
     return (
         <div>
             <button onClick={() => setOpen(o => !o)} className="text-xs text-gray-500 underline">
-                {open ? t('hideMacros') : t('showMacros')}
+                {open ? hideLabel : showLabel}
             </button>
             <div className={`
                 overflow-hidden transition-all duration-300 ease-out
