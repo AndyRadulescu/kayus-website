@@ -1,6 +1,13 @@
-import { contentfulClientApi } from './contentful';
-import {DrinkItemSkeleton, FoodCategorySkeleton, FoodItemSkeleton, PromotionSkeleton} from '@/app/model/menu';
+import {contentfulClientApi} from './contentful';
+import {
+    DrinkItemSkeleton,
+    DrinkSectionSkeleton,
+    FoodCategorySkeleton,
+    FoodItemSkeleton,
+    PromotionSkeleton
+} from '@/app/model/menu';
 import {cookies} from 'next/headers';
+import {Entry} from 'contentful';
 
 export async function getPromotion() {
     const cookieStore = await cookies();
@@ -46,9 +53,10 @@ export async function getFoodItemsByCategorySlug(slug: string) {
     return itemsRes.items;
 }
 
-export async function getDrinksItemsByCategorySlug(slug: string) {
+export async function getDrinksSectionsByCategorySlug(slug: string) {
     const cookieStore = await cookies();
     const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+
     const categoryRes = await contentfulClientApi.getEntries<FoodCategorySkeleton>({
         content_type: 'foodCategory',
         'fields.slug': slug,
@@ -59,9 +67,25 @@ export async function getDrinksItemsByCategorySlug(slug: string) {
     const category = categoryRes.items[0];
     if (!category) return [];
 
+    const drinkSections = await contentfulClientApi.getEntries<DrinkSectionSkeleton>({
+        content_type: 'drinkSection',
+        'fields.drinkType.sys.id': category.sys.id,
+        order: ['fields.priority'],
+        locale: locale,
+    });
+    return drinkSections.items;
+}
+
+export async function getDrinkItemsBySectionId(sectionId: Entry<DrinkSectionSkeleton, undefined, string>) {
+    const cookieStore = await cookies();
+    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'ro';
+
+    const drinkSection = sectionId;
+    if (!drinkSection) return [];
+
     const itemsRes = await contentfulClientApi.getEntries<DrinkItemSkeleton>({
         content_type: 'drinkItem',
-        'fields.drinkType.sys.id': category.sys.id,
+        'fields.drinkSection.sys.id': drinkSection.sys.id,
         locale: locale,
     });
 
