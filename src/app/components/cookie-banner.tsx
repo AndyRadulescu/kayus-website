@@ -1,12 +1,24 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {Trans, useTranslation} from 'react-i18next';
 import LanguageToggle from '@/app/components/language-togler';
 
-export default function CookieBanner() {
+export interface CookieBannerProps {
+    language: string,
+    cookieTitleLabel: string,
+    cookieDescriptionLabel: string,
+    cookieAcceptLabel: string,
+    cookieRejectLabel: string,
+}
+
+export default function CookieBanner({
+                                         language,
+                                         cookieTitleLabel,
+                                         cookieDescriptionLabel,
+                                         cookieAcceptLabel,
+                                         cookieRejectLabel
+                                     }: CookieBannerProps) {
     const [isVisible, setIsVisible] = useState(false);
-    const {i18n} = useTranslation();
 
     useEffect(() => {
         const consent = localStorage.getItem('cookie-consent');
@@ -32,8 +44,8 @@ export default function CookieBanner() {
                 <div className="flex items-center gap-4">
                     <span className="text-3xl">🍪</span>
                     <div className="text-sm md:text-base text-gray-700 leading-relaxed">
-                        <p className="font-semibold text-gray-900"><Trans i18nKey="cookie.title"/></p>
-                        <p><Trans i18nKey="cookie.description"/></p>
+                        <p className="font-semibold text-gray-900">{cookieTitleLabel}</p>
+                        <p>{cookieDescriptionLabel}</p>
                     </div>
                 </div>
 
@@ -42,16 +54,16 @@ export default function CookieBanner() {
                         onClick={() => handleAction(false)}
                         className="flex-1 md:flex-none px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-50 rounded-xl transition-colors"
                     >
-                        <Trans i18nKey="cookie.reject"/>
+                        {cookieRejectLabel}
                     </button>
                     <button
                         onClick={() => handleAction(true)}
                         className="flex-1 md:flex-none px-8 py-2.5 primary-gradient text-black text-sm font-bold rounded-xl transition-all shadow-lg hover:shadow-yellow-200 active:scale-95"
                     >
-                        <Trans i18nKey="cookie.accept"/>
+                        {cookieAcceptLabel}
                     </button>
                 </div>
-                <LanguageToggle initialLocale={i18n.language}/>
+                <LanguageToggle initialLocale={language}/>
             </div>
         </div>
     );

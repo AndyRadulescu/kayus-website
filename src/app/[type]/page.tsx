@@ -8,7 +8,6 @@ import Promotion from '@/app/components/promotion';
 import {notFound} from 'next/navigation';
 import {PropsType, validRestaurantTypes} from '@/app/model/restaurant-type';
 import {getServerLocaleFromCookies} from '@/app/utils';
-import {ClientTranslationProvider} from '@/app/lib/i18n-client';
 
 export default async function Lounge({params}: PropsType) {
     const {type} = await params;
@@ -47,9 +46,10 @@ export default async function Lounge({params}: PropsType) {
             </nav>
             <section className="flex justify-center p-8">
                 <LanguageToggle initialLocale={locale}/>
-                <ClientTranslationProvider locale={i18n.language}>
-                    <CookieBanner/>
-                </ClientTranslationProvider>
+                <CookieBanner
+                    language={i18n.language} cookieTitleLabel={t('cookie.title')}
+                    cookieDescriptionLabel={t('cookie.description')} cookieAcceptLabel={t('cookie.accept')}
+                    cookieRejectLabel={t('cookie.reject')}/>
             </section>
         </main>
     );
