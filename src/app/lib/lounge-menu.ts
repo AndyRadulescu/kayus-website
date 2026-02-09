@@ -44,6 +44,7 @@ export async function getFoodItemsByCategorySlug(slug: string) {
     const itemsRes = await contentfulClientApi.getEntries<FoodItemSkeleton>({
         content_type: 'foodItem',
         'fields.foodType.sys.id': category.sys.id,
+        order: ['fields.priority'],
         locale: locale,
     });
 
@@ -81,6 +82,7 @@ export async function getDrinkItemsBySectionId(sectionId: Entry<DrinkSectionSkel
     const itemsRes = await contentfulClientApi.getEntries<DrinkItemSkeleton>({
         content_type: 'drinkItem',
         'fields.drinkSection.sys.id': drinkSection.sys.id,
+        order: ['fields.priority'],
         locale: locale,
     });
 

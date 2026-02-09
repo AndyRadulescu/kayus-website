@@ -22,6 +22,7 @@ export interface FoodItemFields {
     thumbnail?: EntryFieldTypes.AssetLink;
     availability: EntryFieldTypes.Symbol;
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
+    priority: EntryFieldTypes.Integer;
 }
 
 export interface DrinkSectionFields {
@@ -36,7 +37,7 @@ export interface DrinkItemFields {
     price: EntryFieldTypes.Symbol;
     availability: EntryFieldTypes.Symbol;
     drinkSection: EntryFieldTypes.EntryLink<DrinkSectionSkeleton>;
-
+    priority: EntryFieldTypes.Integer;
 }
 
 export type PromotionSkeleton = EntrySkeletonType<PromotionFields, 'promotion'>;
