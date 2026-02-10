@@ -19,7 +19,7 @@ export default async function FoodContainer({slug, type}: { slug: string, type: 
                 {filteredItems.map((item) => (
                     <li key={item.sys.id}>
                         <div className="bg-neutral-900 mb-4 rounded-2xl">
-                            <AssetWrapper foodImg={item.fields.foodImg}/>
+                            <AssetWrapper foodImg={item.fields.foodImg} thumbnail={item.fields.thumbnail}/>
                             <p className="text-center text-xl font-bold p-2 text-primary">{item.fields.foodTitle}</p>
                             <p className="text-center px-2">{item.fields.ingredients}</p>
                             <div className="flex justify-center text-center">

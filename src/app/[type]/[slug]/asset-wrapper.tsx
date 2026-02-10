@@ -7,11 +7,16 @@ export function isResolvedAsset(asset: Asset | UnresolvedLink<'Asset'>): asset i
 
 type AssetType = UnresolvedLink<'Asset'> | Asset<undefined, string> | undefined;
 
-export default function AssetWrapper({foodImg}: { foodImg: AssetType }) {
+export default function AssetWrapper({foodImg, thumbnail}: { foodImg: AssetType, thumbnail: AssetType }) {
     if (!foodImg) return;
     if (!isResolvedAsset(foodImg)) return <p>Loading...</p>;
     if (!foodImg?.fields?.file) return <p>Image not loaded</p>;
     const url = foodImg.fields.file.url as string;
+    let thumbnailUrl = `${url}#t=0.5`;
+    if (thumbnail && isResolvedAsset(thumbnail) && thumbnail.fields.file) {
+        thumbnailUrl = thumbnail.fields?.file?.url as string ?? `${url}#t=0.5`;
+    }
+    console.log(thumbnailUrl);
     const containerClasses = 'relative w-full overflow-hidden rounded-2xl shadow-md max-h-[250px] lg:max-h-[333px] xl:max-h-[450px] mx-auto';
 
     if (foodImg.fields.file.contentType === 'video/webm') {
@@ -20,7 +25,7 @@ export default function AssetWrapper({foodImg}: { foodImg: AssetType }) {
                 <video
                     autoPlay loop muted playsInline preload="metadata"
                     className="w-full h-full max-h-[450px] object-cover"
-                    poster={`${url}#t=0.5`}
+                    poster={thumbnailUrl}
                 >
                     <source src={url} type="video/webm"/>
                 </video>
