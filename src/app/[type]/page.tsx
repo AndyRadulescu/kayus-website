@@ -28,7 +28,7 @@ export default async function Lounge({params}: PropsType) {
                 <Image src={`/logo-${type}.svg`} alt="Logo" width={100} height={100}/>
             </div>
             <nav>
-                <Promotion/>
+                <Promotion type={type}/>
                 <div className="flex justify-center my-2">
                     <a className="w-[80%] no-underline text-inherit" href="tel:0774080300">
                         <button

@@ -1,5 +1,5 @@
 import {Entry, UnresolvedLink} from 'contentful';
-import {DrinkItemSkeleton, FoodItemSkeleton} from '@/app/model/menu';
+import {DrinkItemSkeleton, FoodItemSkeleton, PromotionSkeleton} from '@/app/model/menu';
 
 export function isResolved<T>(entry: T | UnresolvedLink<'Entry'>): entry is T {
     if (entry != null && typeof entry === 'object' && 'fields' in entry) {
@@ -18,4 +18,8 @@ export function filterAvailabilityFood(type: string, items: Entry<FoodItemSkelet
 
         return availability == null || availability.includes(type);
     });
+}
+
+export function filterAvailabilityPromotions(type: string, items: Entry<PromotionSkeleton, undefined, string>[]): Entry<PromotionSkeleton, undefined, string>[] {
+    return items.filter((item) => item.fields.availability == null || item.fields.availability.includes(type));
 }

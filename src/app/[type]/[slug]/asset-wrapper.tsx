@@ -7,7 +7,7 @@ export function isResolvedAsset(asset: Asset | UnresolvedLink<'Asset'>): asset i
 
 type AssetType = UnresolvedLink<'Asset'> | Asset<undefined, string> | undefined;
 
-export default function AssetWrapper({foodImg, thumbnail}: { foodImg: AssetType, thumbnail: AssetType }) {
+export default function AssetWrapper({foodImg, thumbnail}: { foodImg: AssetType, thumbnail?: AssetType }) {
     if (!foodImg) return;
     if (!isResolvedAsset(foodImg)) return <p>Loading...</p>;
     if (!foodImg?.fields?.file) return <p>Image not loaded</p>;

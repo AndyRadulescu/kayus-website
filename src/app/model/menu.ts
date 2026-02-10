@@ -5,6 +5,7 @@ export interface PromotionFields {
     promotionTitle: EntryFieldTypes.Symbol;
     isVisible: EntryFieldTypes.Boolean;
     promotionMedia: EntryFieldTypes.AssetLink;
+    availability: EntryFieldTypes.Symbol;
 }
 
 export interface FoodCategoryFields {
@@ -18,7 +19,7 @@ export interface FoodItemFields {
     ingredients?: EntryFieldTypes.Symbol;
     macros: EntryFieldTypes.Symbol;
     priceAndInfo: EntryFieldTypes.Symbol;
-    foodImg: EntryFieldTypes.AssetLink;
+    foodImg?: EntryFieldTypes.AssetLink;
     thumbnail?: EntryFieldTypes.AssetLink;
     availability: EntryFieldTypes.Symbol;
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
