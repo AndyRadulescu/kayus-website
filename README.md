@@ -1,5 +1,10 @@
 ## Kayus menu website
 
+Before anything, thank you for checking out this project. If you have questions, please reach out to me. 
+Since this is a production build, I urge everyone to check the [website](https://menu.kayus.ro/lounge/)
+and the [license agreement](./LICENSE.md#-strict-license--terms-of-use). Please do not redistribute, commercialize or impersonate.
+Thanks!
+
 ![kayus menu website](./docs/kayus-website.png)
 ## 
 
@@ -27,4 +32,6 @@ The app has 4 main data structures:
 - FoodCategory - Menu
 - FoodItems - food products
 - DrinkItems - drink products
+- DrinkSections - used to separate drinks into sections (e.g. "soft drinks"; "beer"; etc.) 
 - Promotions - the banner that appear on the home page (when toggeled on)
+
