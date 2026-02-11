@@ -22,7 +22,7 @@ export default function AssetWrapper({foodImg, thumbnail}: { foodImg: AssetType,
         return (
             <div className={containerClasses}>
                 <video
-                    loop muted playsInline preload="metadata"
+                    autoPlay loop muted playsInline preload="metadata"
                     className="w-full h-full max-h-[450px] object-cover"
                     poster={thumbnailUrl}
                 >
