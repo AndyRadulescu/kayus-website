@@ -20,12 +20,14 @@ export default async function Lounge({params}: PropsType) {
     const menu = await getLoungeMenu();
     const sortedMenu = [...menu].sort((a, b) => a.fields.priority - b.fields.priority);
 
+    const {width, height} = type === 'lounge' ? {width: 200, height: 54} : {width: 100, height: 100};
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {i18n, t} = await useTranslationServer();
     return (
         <main className="p-4">
             <div className="flex justify-center mt-4 mb-8">
-                <Image src={`/logo-${type}.svg`} alt="Logo" width={100} height={100}/>
+                <Image src={`/logo-${type}.png`} alt="Logo" width={width} height={height}/>
             </div>
             <nav>
                 <Promotion type={type}/>

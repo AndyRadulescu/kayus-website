@@ -16,14 +16,13 @@ export default function AssetWrapper({foodImg, thumbnail}: { foodImg: AssetType,
     if (thumbnail && isResolvedAsset(thumbnail) && thumbnail.fields.file) {
         thumbnailUrl = thumbnail.fields?.file?.url as string ?? `${url}#t=0.5`;
     }
-    console.log(thumbnailUrl);
     const containerClasses = 'relative w-full overflow-hidden rounded-2xl shadow-md max-h-[250px] lg:max-h-[333px] xl:max-h-[450px] mx-auto';
 
     if (foodImg.fields.file.contentType === 'video/webm') {
         return (
             <div className={containerClasses}>
                 <video
-                    autoPlay loop muted playsInline preload="metadata"
+                    loop muted playsInline preload="metadata"
                     className="w-full h-full max-h-[450px] object-cover"
                     poster={thumbnailUrl}
                 >
