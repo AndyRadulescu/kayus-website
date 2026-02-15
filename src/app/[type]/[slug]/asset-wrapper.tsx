@@ -8,18 +8,16 @@ export function isResolvedAsset(asset: Asset | UnresolvedLink<'Asset'>): asset i
 type AssetType = UnresolvedLink<'Asset'> | Asset<undefined, string> | undefined;
 
 export default function AssetWrapper({videoUrl, thumbnail}: { videoUrl?: string, thumbnail?: AssetType }) {
-    const hasFoodVideoUrl = !videoUrl || videoUrl.length > 0;
+    const hasFoodVideoUrl = !!videoUrl
     const hasThumbnail = thumbnail && isResolvedAsset(thumbnail) && thumbnail.fields?.file?.url;
 
     if (!hasFoodVideoUrl && !hasThumbnail) {
         return;
     }
 
-    const foodImgUrl = hasFoodVideoUrl ? videoUrl : '';
-
     const thumbnailUrl = hasThumbnail
         ? (thumbnail?.fields?.file?.url as string)
-        : `${foodImgUrl}#t=0.5`;
+        : undefined;
 
     const thumbnailAlt = hasThumbnail
         ? (thumbnail.fields.title as string)
