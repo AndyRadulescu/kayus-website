@@ -7,16 +7,15 @@ export function isResolvedAsset(asset: Asset | UnresolvedLink<'Asset'>): asset i
 
 type AssetType = UnresolvedLink<'Asset'> | Asset<undefined, string> | undefined;
 
-export default function AssetWrapper({foodImg, thumbnail}: { foodImg: AssetType, thumbnail?: AssetType }) {
-    const hasFoodImg = foodImg && isResolvedAsset(foodImg) && foodImg.fields?.file?.url;
+export default function AssetWrapper({videoUrl, thumbnail}: { videoUrl?: string, thumbnail?: AssetType }) {
+    const hasFoodVideoUrl = !videoUrl || videoUrl.length > 0;
     const hasThumbnail = thumbnail && isResolvedAsset(thumbnail) && thumbnail.fields?.file?.url;
 
-    if (!hasFoodImg && !hasThumbnail) {
-        return
+    if (!hasFoodVideoUrl && !hasThumbnail) {
+        return;
     }
 
-    const foodImgUrl = hasFoodImg ? (foodImg?.fields?.file?.url as string) : "";
-    const foodImgTitle = hasFoodImg ? (foodImg.fields.title as string) : "";
+    const foodImgUrl = hasFoodVideoUrl ? videoUrl : '';
 
     const thumbnailUrl = hasThumbnail
         ? (thumbnail?.fields?.file?.url as string)
@@ -24,22 +23,22 @@ export default function AssetWrapper({foodImg, thumbnail}: { foodImg: AssetType,
 
     const thumbnailAlt = hasThumbnail
         ? (thumbnail.fields.title as string)
-        : foodImgTitle;
+        : 'food image thumbnail';
     const containerClasses = 'relative w-full overflow-hidden rounded-2xl shadow-md max-h-[250px] lg:max-h-[333px] xl:max-h-[450px] mx-auto';
 
-    // if (foodImg.fields.file.contentType === 'video/webm') {
-    //     return (
-    //         <div className={containerClasses}>
-    //             <video
-    //                 autoPlay loop muted playsInline preload="metadata"
-    //                 className="w-full h-full max-h-[450px] object-cover"
-    //                 poster={thumbnailUrl}
-    //             >
-    //                 <source src={url} type="video/webm"/>
-    //             </video>
-    //         </div>
-    //     );
-    // }
+    if (videoUrl) {
+        return (
+            <div className={containerClasses}>
+                <video
+                    autoPlay loop muted playsInline preload="metadata"
+                    className="w-full h-full max-h-[450px] object-cover"
+                    poster={thumbnailUrl}
+                >
+                    <source src={videoUrl} type="video/webm"/>
+                </video>
+            </div>
+        );
+    }
 
     return (
         <div className={containerClasses}>
