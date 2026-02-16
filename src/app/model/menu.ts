@@ -4,7 +4,7 @@ import {EntryFieldTypes, EntrySkeletonType} from 'contentful';
 export interface PromotionFields {
     promotionTitle: EntryFieldTypes.Symbol;
     isVisible: EntryFieldTypes.Boolean;
-    promotionMedia: EntryFieldTypes.AssetLink;
+    promotionMediaUrl: EntryFieldTypes.Symbol
     availability: EntryFieldTypes.Symbol;
 }
 
@@ -19,11 +19,11 @@ export interface FoodItemFields {
     ingredients?: EntryFieldTypes.Symbol;
     macros: EntryFieldTypes.Symbol;
     priceAndInfo: EntryFieldTypes.Symbol;
-    thumbnail?: EntryFieldTypes.AssetLink;
     availability: EntryFieldTypes.Symbol;
     foodType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
     priority: EntryFieldTypes.Integer;
     videoUrl?: EntryFieldTypes.Symbol;
+    thumbnailUrl?: EntryFieldTypes.Symbol;
 }
 
 export interface DrinkSectionFields {

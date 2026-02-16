@@ -1,27 +1,9 @@
 import Image from 'next/image';
-import {Asset, UnresolvedLink} from 'contentful';
 
-export function isResolvedAsset(asset: Asset | UnresolvedLink<'Asset'>): asset is Asset {
-    return asset && 'fields' in asset;
-}
+export default function AssetWrapper({videoUrl, thumbnailUrl}: { videoUrl?: string, thumbnailUrl?: string }) {
+    if (!videoUrl && !thumbnailUrl) return;
 
-type AssetType = UnresolvedLink<'Asset'> | Asset<undefined, string> | undefined;
-
-export default function AssetWrapper({videoUrl, thumbnail}: { videoUrl?: string, thumbnail?: AssetType }) {
-    const hasFoodVideoUrl = !!videoUrl
-    const hasThumbnail = thumbnail && isResolvedAsset(thumbnail) && thumbnail.fields?.file?.url;
-
-    if (!hasFoodVideoUrl && !hasThumbnail) {
-        return;
-    }
-
-    const thumbnailUrl = hasThumbnail
-        ? (thumbnail?.fields?.file?.url as string)
-        : undefined;
-
-    const thumbnailAlt = hasThumbnail
-        ? (thumbnail.fields.title as string)
-        : 'food image thumbnail';
+    const thumbnailAlt = thumbnailUrl || 'food image thumbnail';
     const containerClasses = 'relative w-full overflow-hidden rounded-2xl shadow-md max-h-[250px] lg:max-h-[333px] xl:max-h-[450px] mx-auto';
 
     if (videoUrl) {
@@ -42,7 +24,7 @@ export default function AssetWrapper({videoUrl, thumbnail}: { videoUrl?: string,
         <div className={containerClasses}>
             <div className="aspect-[4/3] w-full max-h-[450px]">
                 <Image
-                    src={`https:${thumbnailUrl}`}
+                    src={thumbnailUrl as string}
                     alt={thumbnailAlt}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

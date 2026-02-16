@@ -11,7 +11,7 @@ export default async function Promotion({type}: { type: RestaurantType }) {
     return (
         <div className="w-full mb-4 flex justify-center">
             <a className="w-[80%] block no-underline text-inherit" href="tel:0774080300">
-                <AssetWrapper thumbnail={filteredPromos[0].fields.promotionMedia}/>
+                <AssetWrapper thumbnailUrl={filteredPromos[0].fields.promotionMediaUrl}/>
             </a>
         </div>
     );
