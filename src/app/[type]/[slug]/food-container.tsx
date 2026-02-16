@@ -4,6 +4,7 @@ import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
 import {filterAvailabilityFood, isResolved} from '@/app/[type]/[slug]/utils';
 import {RestaurantType} from '@/app/model/restaurant-type';
 import {useTranslationServer} from '@/app/lib/i18n-server';
+import AllergenComponent from '@/app/components/alergen';
 
 export default async function FoodContainer({slug, type}: { slug: string, type: RestaurantType }) {
     const items = await getFoodItemsByCategorySlug(slug);
@@ -11,11 +12,11 @@ export default async function FoodContainer({slug, type}: { slug: string, type: 
     const filteredItems = filterAvailabilityFood(type, items);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const {t} = await useTranslationServer();
+    const {t, i18n} = await useTranslationServer();
     return (
         <>
             <h1 className="text-center text-2xl mb-6 uppercase">{isResolved(foodTypeField) ? `- ${foodTypeField.fields.foodType} -` : 'Loading...'}</h1>
-            <ul>
+            <ul className="mb-4">
                 {filteredItems.map((item) => (
                     <li key={item.sys.id}>
                         <div className="bg-neutral-900 mb-4 rounded-2xl">
@@ -30,6 +31,7 @@ export default async function FoodContainer({slug, type}: { slug: string, type: 
                     </li>
                 ))}
             </ul>
+            <AllergenComponent lang={i18n.language}/>
         </>
     );
 }
