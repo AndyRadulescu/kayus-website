@@ -17,7 +17,7 @@ export default async function Lounge({params}: PropsType) {
     }
     const locale = await getServerLocaleFromCookies();
 
-    const menu = await getLoungeMenu();
+    const menu = await getLoungeMenu(locale);
     const sortedMenu = [...menu].sort((a, b) => a.fields.priority - b.fields.priority);
 
     const {width, height} = type === 'lounge' ? {width: 200, height: 54} : {width: 100, height: 100};

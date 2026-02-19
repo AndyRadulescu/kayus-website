@@ -7,12 +7,11 @@ import {useTranslationServer} from '@/app/lib/i18n-server';
 import AllergenComponent from '@/app/components/alergen';
 
 export default async function FoodContainer({slug, type}: { slug: string, type: RestaurantType }) {
-    const items = await getFoodItemsByCategorySlug(slug);
-    const foodTypeField = items[0]?.fields?.foodType;
-    const filteredItems = filterAvailabilityFood(type, items);
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {t, i18n} = await useTranslationServer();
+    const items = await getFoodItemsByCategorySlug(slug, i18n.language);
+    const foodTypeField = items[0]?.fields?.foodType;
+    const filteredItems = filterAvailabilityFood(type, items);
     return (
         <>
             <h1 className="text-center text-2xl mb-6 uppercase">{isResolved(foodTypeField) ? `- ${foodTypeField.fields.foodType} -` : 'Loading...'}</h1>
