@@ -1,14 +1,16 @@
 import {getDrinkItemsBySectionId, getDrinksSectionsByCategorySlug} from '@/app/lib/lounge-menu';
 import {filterAvailabilityDrinks, isResolved} from '@/app/[type]/[slug]/utils';
 import {RestaurantType} from '@/app/model/restaurant-type';
+import {getServerLocaleFromCookies} from '@/app/utils';
 
 export default async function DrinksContainer({slug, type}: { slug: string, type: RestaurantType }) {
-    const sections = await getDrinksSectionsByCategorySlug(slug);
+    const locale = await getServerLocaleFromCookies();
+    const sections = await getDrinksSectionsByCategorySlug(slug, locale);
     const drinksTypeField = sections[0]?.fields?.drinkType;
 
     const groupedDrinksBySection = await Promise.all(
         sections.map(async (section) => {
-            const items = await getDrinkItemsBySectionId(section);
+            const items = await getDrinkItemsBySectionId(section.sys.id, locale);
             return {
                 section: section,
                 items: filterAvailabilityDrinks(type, items)
