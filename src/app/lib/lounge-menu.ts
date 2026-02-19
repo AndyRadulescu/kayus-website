@@ -18,7 +18,7 @@ export const getPromotion = unstable_cache(
         return res.items;
     },
     ['promotion-cache'],
-    {revalidate: 86400}
+    {revalidate: 86400, tags: ['menu', 'promotion']}
 );
 
 export const getLoungeMenu = unstable_cache(
@@ -31,7 +31,7 @@ export const getLoungeMenu = unstable_cache(
         return res.items;
     },
     ['lounge-menu-cache'],
-    {revalidate: 86400}
+    {revalidate: 86400, tags: ['menu', 'categories']}
 );
 
 export const getFoodItemsByCategorySlug = unstable_cache(
@@ -56,7 +56,7 @@ export const getFoodItemsByCategorySlug = unstable_cache(
         return itemsRes.items;
     },
     ['food-items-cache'],
-    {revalidate: 86400}
+    {revalidate: 86400, tags: ['menu', 'food']}
 );
 
 export const getDrinksSectionsByCategorySlug = unstable_cache(
@@ -80,7 +80,7 @@ export const getDrinksSectionsByCategorySlug = unstable_cache(
         return drinkSections.items;
     },
     ['drink-sections-cache'],
-    {revalidate: 86400}
+    {revalidate: 86400, tags: ['menu', 'drink-sections']}
 );
 
 export const getDrinkItemsBySectionId = unstable_cache(
@@ -95,5 +95,5 @@ export const getDrinkItemsBySectionId = unstable_cache(
         return itemsRes.items;
     },
     ['drink-items-cache'],
-    {revalidate: 86400}
+    {revalidate: 86400, tags: ['menu', 'drinks']}
 );
