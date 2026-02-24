@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         canonical: '/',
         languages: {
             'en-US': '/en',
-            'ro-RO': '/ro',
+            'ro': '/ro',
         },
     },
     openGraph: {
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
                 alt: 'Kayus Lounge Logo',
             },
         ],
-        locale: 'ro_RO',
+        locale: 'ro',
         type: 'website',
     },
     twitter: {
@@ -62,9 +62,9 @@ export const metadata: Metadata = {
             'max-snippet': -1,
         },
     },
-    verification: {
-        google: 'dr9JlS0Vc93Q971H7F90_-4ry6EH742RzQdQ3D3BvoI',
-    },
+    // verification: {
+        // google: 'dr9JlS0Vc93Q971H7F90_-4ry6EH742RzQdQ3D3BvoI',
+    // },
 };
 
 export default async function RootLayout({children,}: Readonly<{ children: React.ReactNode }>) {
