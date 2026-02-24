@@ -12,6 +12,7 @@ export interface FoodCategoryFields {
     foodType: EntryFieldTypes.Symbol;
     slug: EntryFieldTypes.Symbol;
     priority: EntryFieldTypes.Integer;
+    availability: EntryFieldTypes.Symbol;
 }
 
 export interface FoodItemFields {
