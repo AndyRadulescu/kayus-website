@@ -8,6 +8,7 @@ import Promotion from '@/app/components/promotion';
 import {notFound} from 'next/navigation';
 import {PropsType, validRestaurantTypes} from '@/app/model/restaurant-type';
 import {getServerLocaleFromCookies} from '@/app/utils';
+import {filterAvailabilityCategory, getTypesPhoneNumber} from '@/app/[type]/[slug]/utils';
 
 export default async function Lounge({params}: PropsType) {
     const {type} = await params;
@@ -18,7 +19,8 @@ export default async function Lounge({params}: PropsType) {
     const locale = await getServerLocaleFromCookies();
 
     const menu = await getLoungeMenu(locale);
-    const sortedMenu = [...menu].sort((a, b) => a.fields.priority - b.fields.priority);
+    const filteredMenuItems = filterAvailabilityCategory(type, menu);
+    const sortedMenu = [...filteredMenuItems].sort((a, b) => a.fields.priority - b.fields.priority);
 
     const {width, height} = type === 'lounge' ? {width: 200, height: 54} : {width: 100, height: 100};
 
@@ -32,7 +34,7 @@ export default async function Lounge({params}: PropsType) {
             <nav>
                 <Promotion type={type}/>
                 <div className="flex justify-center my-2">
-                    <a className="w-[80%] no-underline text-inherit" href="tel:0774080300">
+                    <a className="w-[80%] no-underline text-inherit" href={getTypesPhoneNumber(type)}>
                         <button
                             className="w-full pointer primary-gradient text-black py-2 rounded-full uppercase text-xl">{t('bookATable')}</button>
                     </a>
