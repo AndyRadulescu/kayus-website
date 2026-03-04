@@ -12,32 +12,34 @@ export default async function Home() {
                 {t('select.menu', 'Select menu')}
             </h1>
             
-            <div className="flex flex-col sm:flex-row gap-8 w-full max-w-2xl px-8 md:px-0">
-                <Link href="/lounge" className="flex-1">
-                    <div className="bg-neutral-900 border border-primary rounded-3xl p-8 flex flex-col items-center justify-center aspect-square transition-transform hover:scale-105 active:scale-95 group shadow-xl">
-                        <div className="relative w-full h-full max-w-[200px] max-h-[100px]">
+            <div className="flex flex-col sm:flex-row gap-8 w-full max-w-3xl px-8 md:px-0 items-stretch">
+                <Link href="/lounge" className="flex-1 flex flex-col group">
+                    <div className="flex-1 bg-neutral-900 border border-primary rounded-3xl p-12 flex flex-col items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl min-h-[320px]">
+                        <div className="relative w-full h-28">
                             <Image 
                                 src="/logo-lounge.png" 
                                 alt="Kayus Lounge" 
-                                fill
+                                fill 
                                 className="object-contain"
+                                priority
                             />
                         </div>
-                        <span className="mt-6 text-xl font-bold uppercase tracking-wide group-hover:text-primary transition-colors">Lounge</span>
+                        <span className="mt-8 text-xl font-bold uppercase tracking-widest group-hover:text-primary transition-colors">Lounge</span>
                     </div>
                 </Link>
 
-                <Link href="/hotel" className="flex-1">
-                    <div className="bg-neutral-900 border border-primary rounded-3xl p-8 flex flex-col items-center justify-center aspect-square transition-transform hover:scale-105 active:scale-95 group shadow-xl">
-                        <div className="relative w-full h-full max-w-[150px] max-h-[150px]">
+                <Link href="/hotel" className="flex-1 flex flex-col group">
+                    <div className="flex-1 bg-neutral-900 border border-primary rounded-3xl p-12 flex flex-col items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl min-h-[320px]">
+                        <div className="relative w-full h-28">
                             <Image 
                                 src="/logo-hotel.png" 
                                 alt="Kayus Hotel" 
-                                fill
+                                fill 
                                 className="object-contain"
+                                priority
                             />
                         </div>
-                        <span className="mt-6 text-xl font-bold uppercase tracking-wide group-hover:text-primary transition-colors">Hotel</span>
+                        <span className="mt-8 text-xl font-bold uppercase tracking-widest group-hover:text-primary transition-colors">Hotel</span>
                     </div>
                 </Link>
             </div>
