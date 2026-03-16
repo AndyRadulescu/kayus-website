@@ -16,7 +16,9 @@ export function filterAvailability<T extends EntrySkeletonType<{ availability: E
         if (typeof availability === 'string') {
             return availability.includes(type);
         }
-        return availability == null;
+        // If type is jacuzzi, it must be explicitly set in availability.
+        // For other types, null/undefined availability means it's available everywhere.
+        return type !== 'jacuzzi' && availability == null;
     });
 }
 

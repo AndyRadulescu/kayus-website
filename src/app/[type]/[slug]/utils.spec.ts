@@ -31,17 +31,24 @@ describe('utils', () => {
             {fields: {availability: 'lounge'}},
             {fields: {availability: 'hotel'}},
             {fields: {availability: 'lounge,hotel'}},
+            {fields: {availability: 'jacuzzi'}},
             {fields: {availability: null}},
         ] as any[];
 
         it('should filter items by type or null availability', () => {
             const resultLounge = filterAvailability('lounge', mockItems);
-            expect(resultLounge).toHaveLength(3);
+            expect(resultLounge).toHaveLength(3); // lounge, lounge,hotel, null
             expect(resultLounge.some(i => i.fields.availability === 'hotel')).toBe(false);
 
             const resultHotel = filterAvailability('hotel', mockItems);
-            expect(resultHotel).toHaveLength(3);
+            expect(resultHotel).toHaveLength(3); // hotel, lounge,hotel, null
             expect(resultHotel.some(i => i.fields.availability === 'lounge' && !i.fields.availability.includes('hotel'))).toBe(false);
+        });
+
+        it('should filter items strictly for jacuzzi (null availability is excluded)', () => {
+            const resultJacuzzi = filterAvailability('jacuzzi', mockItems);
+            expect(resultJacuzzi).toHaveLength(1); // only 'jacuzzi'
+            expect(resultJacuzzi[0].fields.availability).toBe('jacuzzi');
         });
 
         it('should return items if type is included in comma-separated availability', () => {
