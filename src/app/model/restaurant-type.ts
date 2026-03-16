@@ -1,4 +1,4 @@
-export const validRestaurantTypes = ['lounge', 'hotel'] as const;
+export const validRestaurantTypes = ['lounge', 'hotel', 'jacuzzi'] as const;
 export type RestaurantType = typeof validRestaurantTypes[number];
 
 export interface PropsSlug {

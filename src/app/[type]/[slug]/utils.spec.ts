@@ -1,9 +1,6 @@
 import {describe, expect, it} from 'vitest';
 import {
-    filterAvailabilityCategory,
-    filterAvailabilityDrinks,
-    filterAvailabilityFood,
-    filterAvailabilityPromotions,
+    filterAvailability,
     getTypesPhoneNumber,
     isResolved
 } from './utils';
@@ -29,7 +26,7 @@ describe('utils', () => {
         });
     });
 
-    describe('filterAvailability functions', () => {
+    describe('filterAvailability function', () => {
         const mockItems = [
             {fields: {availability: 'lounge'}},
             {fields: {availability: 'hotel'}},
@@ -37,32 +34,20 @@ describe('utils', () => {
             {fields: {availability: null}},
         ] as any[];
 
-        it('filterAvailabilityDrinks should filter items by type or null availability', () => {
-            const result = filterAvailabilityDrinks('lounge', mockItems);
-            expect(result).toHaveLength(3);
-            expect(result.some(i => i.fields.availability === 'hotel')).toBe(false);
+        it('should filter items by type or null availability', () => {
+            const resultLounge = filterAvailability('lounge', mockItems);
+            expect(resultLounge).toHaveLength(3);
+            expect(resultLounge.some(i => i.fields.availability === 'hotel')).toBe(false);
+
+            const resultHotel = filterAvailability('hotel', mockItems);
+            expect(resultHotel).toHaveLength(3);
+            expect(resultHotel.some(i => i.fields.availability === 'lounge' && !i.fields.availability.includes('hotel'))).toBe(false);
         });
 
-        it('filterAvailabilityFood should filter items by type or null availability', () => {
-            const result = filterAvailabilityFood('hotel', mockItems);
-            expect(result).toHaveLength(3);
-            expect(result.some(i => i.fields.availability === 'lounge' && !i.fields.availability.includes('hotel'))).toBe(false);
-        });
-
-        it('filterAvailabilityPromotions should filter items by type or null availability', () => {
-            const result = filterAvailabilityPromotions('lounge', mockItems);
-            expect(result).toHaveLength(3);
-        });
-
-        it('filterAvailabilityCategory should filter items by type or null availability', () => {
-            const result = filterAvailabilityCategory('hotel', mockItems);
-            expect(result).toHaveLength(3);
-        });
-
-        it('should return all items if type is included in comma-separated availability', () => {
-            const items = [{fields: {availability: 'lounge,hotel'}}] as never[];
-            expect(filterAvailabilityDrinks('lounge', items)).toHaveLength(1);
-            expect(filterAvailabilityDrinks('hotel', items)).toHaveLength(1);
+        it('should return items if type is included in comma-separated availability', () => {
+            const items = [{fields: {availability: 'lounge,hotel'}}] as any[];
+            expect(filterAvailability('lounge', items)).toHaveLength(1);
+            expect(filterAvailability('hotel', items)).toHaveLength(1);
         });
     });
 

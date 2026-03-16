@@ -1,5 +1,5 @@
 import {getDrinkItemsBySectionId, getDrinksSectionsByCategorySlug} from '@/app/lib/lounge-menu';
-import {filterAvailabilityDrinks, isResolved} from '@/app/[type]/[slug]/utils';
+import {filterAvailability, isResolved} from '@/app/[type]/[slug]/utils';
 import {RestaurantType} from '@/app/model/restaurant-type';
 import {getServerLocaleFromCookies} from '@/app/utils';
 
@@ -13,10 +13,11 @@ export default async function DrinksContainer({slug, type}: { slug: string, type
             const items = await getDrinkItemsBySectionId(section.sys.id, locale);
             return {
                 section: section,
-                items: filterAvailabilityDrinks(type, items)
+                items: filterAvailability(type, items)
             };
         })
     );
+
 
     return (
         <>
