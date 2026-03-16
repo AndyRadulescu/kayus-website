@@ -1,13 +1,13 @@
 import {getPromotion} from '@/app/lib/lounge-menu';
 import AssetWrapper from '@/app/[type]/[slug]/asset-wrapper';
-import {filterAvailabilityPromotions} from '@/app/[type]/[slug]/utils';
+import {filterAvailability} from '@/app/[type]/[slug]/utils';
 import {RestaurantType} from '@/app/model/restaurant-type';
 import {getServerLocaleFromCookies} from '@/app/utils';
 
 export default async function Promotion({type}: { type: RestaurantType }) {
     const locale = await getServerLocaleFromCookies();
     const promotion = await getPromotion(locale);
-    const filteredPromos = filterAvailabilityPromotions(type, promotion);
+    const filteredPromos = filterAvailability(type, promotion);
 
     if (!filteredPromos || filteredPromos.length === 0 || !filteredPromos[0].fields.isVisible) return null;
     return (

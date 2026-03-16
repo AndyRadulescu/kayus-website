@@ -1,7 +1,7 @@
 import AssetWrapper from '@/app/[type]/[slug]/asset-wrapper';
 import {Macros} from '@/app/components/macros';
 import {getFoodItemsByCategorySlug} from '@/app/lib/lounge-menu';
-import {filterAvailabilityFood, isResolved} from '@/app/[type]/[slug]/utils';
+import {filterAvailability, isResolved} from '@/app/[type]/[slug]/utils';
 import {RestaurantType} from '@/app/model/restaurant-type';
 import {useTranslationServer} from '@/app/lib/i18n-server';
 import AllergenComponent from '@/app/components/alergen';
@@ -11,7 +11,8 @@ export default async function FoodContainer({slug, type}: { slug: string, type: 
     const {t, i18n} = await useTranslationServer();
     const items = await getFoodItemsByCategorySlug(slug, i18n.language);
     const foodTypeField = items[0]?.fields?.foodType;
-    const filteredItems = filterAvailabilityFood(type, items);
+    const filteredItems = filterAvailability(type, items);
+
     return (
         <>
             <h1 className="text-center text-2xl mb-6 uppercase">{isResolved(foodTypeField) ? `- ${foodTypeField.fields.foodType} -` : 'Loading...'}</h1>
