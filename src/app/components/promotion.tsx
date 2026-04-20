@@ -12,7 +12,7 @@ export default async function Promotion({type}: { type: RestaurantType }) {
     if (!filteredPromos || filteredPromos.length === 0 || !filteredPromos[0].fields.isVisible) return null;
     return (
         <div className="w-full mb-4 flex justify-center">
-            <a className="w-[80%] block no-underline text-inherit" href="tel:0774080300">
+            <a className="w-[80%] block no-underline text-inherit" href="tel:0774080500">
                 <AssetWrapper thumbnailUrl={filteredPromos[0].fields.promotionMediaUrl}/>
             </a>
         </div>
