@@ -2,7 +2,8 @@ import {describe, expect, it} from 'vitest';
 import {
     filterAvailability,
     getTypesPhoneNumber,
-    isResolved
+    isResolved,
+    removeEmptyDrinkSections
 } from './utils';
 
 describe('utils', () => {
@@ -58,6 +59,43 @@ describe('utils', () => {
         });
     });
 
+    describe('removeEmptyDrinkSections', () => {
+        it('should filter out sections that have no items', () => {
+            const sections = [
+                {section: {sys: {id: '1'}} as any, items: [{sys: {id: 'item1'}} as any]},
+                {section: {sys: {id: '2'}} as any, items: []},
+                {section: {sys: {id: '3'}} as any, items: [{sys: {id: 'item2'}} as any]},
+            ];
+
+            const result = removeEmptyDrinkSections(sections);
+
+            expect(result).toHaveLength(2);
+            expect(result.map(s => s.section.sys.id)).toEqual(['1', '3']);
+        });
+
+        it('should return an empty array when all sections have no items', () => {
+            const sections = [
+                {section: {sys: {id: '1'}} as any, items: []},
+                {section: {sys: {id: '2'}} as any, items: []},
+            ];
+
+            const result = removeEmptyDrinkSections(sections);
+
+            expect(result).toHaveLength(0);
+        });
+
+        it('should return all sections when none are empty', () => {
+            const sections = [
+                {section: {sys: {id: '1'}} as any, items: [{sys: {id: 'item1'}} as any]},
+                {section: {sys: {id: '2'}} as any, items: [{sys: {id: 'item2'}} as any]},
+            ];
+
+            const result = removeEmptyDrinkSections(sections);
+
+            expect(result).toHaveLength(2);
+        });
+    });
+
     it.each([
         ['lounge', 'tel:0774080300'],
         ['hotel', 'tel:0723565077'],
@@ -65,3 +103,4 @@ describe('utils', () => {
         expect(getTypesPhoneNumber(type)).toBe(expectedNumber);
     });
 });
+

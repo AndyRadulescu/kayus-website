@@ -1,4 +1,5 @@
 import {Entry, EntryFieldTypes, EntrySkeletonType, UnresolvedLink} from 'contentful';
+import {DrinkItemSkeleton, DrinkSectionSkeleton} from "@/app/model/menu";
 
 export function isResolved<T>(entry: T | UnresolvedLink<'Entry'>): entry is T {
     if (entry != null && typeof entry === 'object' && 'fields' in entry) {
@@ -20,6 +21,13 @@ export function filterAvailability<T extends EntrySkeletonType<{ availability: E
         // For other types, null/undefined availability means it's available everywhere.
         return type !== 'jacuzzi' && availability == null;
     });
+}
+
+export function removeEmptyDrinkSections(sections: {
+    section: Entry<DrinkSectionSkeleton, undefined, string>;
+    items: Entry<DrinkItemSkeleton, undefined, string>[];
+}[]) {
+    return sections.filter(item => item.items.length !== 0)
 }
 
 export function getTypesPhoneNumber(type: string) {
