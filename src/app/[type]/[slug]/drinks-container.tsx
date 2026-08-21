@@ -1,5 +1,5 @@
 import {getDrinkItemsBySectionId, getDrinksSectionsByCategorySlug} from '@/app/lib/lounge-menu';
-import {filterAvailability, isResolved} from '@/app/[type]/[slug]/utils';
+import {filterAvailability, isResolved, removeEmptyDrinkSections} from '@/app/[type]/[slug]/utils';
 import {RestaurantType} from '@/app/model/restaurant-type';
 import {getServerLocaleFromCookies} from '@/app/utils';
 
@@ -17,7 +17,7 @@ export default async function DrinksContainer({slug, type}: { slug: string, type
             };
         })
     );
-
+    const filteredGroupedDrinksBySection = removeEmptyDrinkSections(groupedDrinksBySection);
 
     return (
         <>
@@ -25,7 +25,7 @@ export default async function DrinksContainer({slug, type}: { slug: string, type
                 {isResolved(drinksTypeField) ? ` - ${drinksTypeField.fields.foodType} - ` : 'Loading...'}
             </h1>
 
-            {groupedDrinksBySection.map(({section, items}) => {
+            {filteredGroupedDrinksBySection.map(({section, items}) => {
                 return (
                     <section key={section.sys.id} className="mb-8">
                         <h2 className="text-xl font-bold border-b pb-2 mb-4 text-primary uppercase tracking-wide">
