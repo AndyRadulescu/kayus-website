@@ -32,7 +32,6 @@ export interface DrinkSectionFields {
     priority: EntryFieldTypes.Integer;
     slug: EntryFieldTypes.Symbol;
     drinkType: EntryFieldTypes.EntryLink<FoodCategorySkeleton>;
-    availability: EntryFieldTypes.Symbol;
 }
 
 export interface DrinkItemFields {
