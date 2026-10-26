@@ -36,7 +36,12 @@ export default async function Lounge({params}: PropsType) {
                 <div className="flex justify-center my-2">
                     <a className="w-[80%] no-underline text-inherit" href={getTypesPhoneNumber(type)}>
                         <button
-                            className="w-full pointer primary-gradient text-black py-2 rounded-full uppercase text-xl">{t('bookATable')}</button>
+                            className="w-full pointer primary-gradient text-black py-2 rounded-full uppercase text-xl">
+                            {t('bookATable')}
+                            {['hotel', 'jacuzzi'].includes(type) && (
+                                <span className="inline-block font-bold">- Room service -</span>
+                            )}
+                        </button>
                     </a>
                 </div>
                 {sortedMenu.map((item) => (
